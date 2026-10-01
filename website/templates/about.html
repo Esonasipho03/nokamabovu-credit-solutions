@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}About — Nokamabovu Credit Solutions{% endblock %}
+{% block content %}
+
+  <section class="nkmb-hero">
+    <div class="nkmb-hero-bg">
+      <img class="nkmb-hero-photo" src="{% static 'img/about-hero-bg.jpg' %}" alt="" style="object-position:center 68%;">
+      <div class="nkmb-hero-scrim"></div>
+    </div>
+    <div class="nkmb-hero-left">
+      <h1>Who we are.</h1>
+      <p class="sans">Recovering value. Creating opportunities. Driving sustainable growth.</p>
+      <div class="nkmb-scroll-cue">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5 L7 10 L12 5" stroke="#A14823" stroke-width="2" fill="none"/></svg>
+        More below — or jump straight to a section
+      </div>
+    </div>
+  </section>
+
+  <nav class="nkmb-quicknav" aria-label="Jump to section">
+    <a href="#story">Our story</a>
+    <a href="#apart">What sets us apart</a>
+    <a href="#who-we-work-with">Who we work with</a>
+    <a href="#mission-vision">Mission &amp; vision</a>
+    <a href="#values">Our values</a>
+  </nav>
+
+  <section class="nkmb-section" id="story">
+    <div class="nkmb-section-head" style="grid-template-columns:1fr; margin-bottom:32px;">
+      <h2><span class="nkmb-marker-dot"></span>Our story</h2>
+    </div>
+    <div class="nkmb-photo-pair">
+      <div>
+        <p class="sans" style="font-size:15.5px; color:var(--muted); margin:0 0 20px;">
+          Nokamabovu Credit Solutions (Pty) Ltd is a 100% Black female-owned, B-BBEE Level 1 credit solutions
+          company, established in 2015 on principles of integrity, efficiency, and client-centered
+          service. Over time we've grown into a trusted partner for public and private
+          institutions, helping them grow through tailored credit and insurance solutions,
+          while also recovering what's already owed — all to the same ethical standard.
+        </p>
+        <p class="sans" style="font-size:15.5px; color:var(--muted); margin:0;">
+         We understand that every client relationship calls for sensitivity, professionalism,
+         and strategic engagement — whether we're growing revenue or recovering what's owed.
+         Our sales services connect public and private institutions with tailored credit 
+         and insurance solutions to strengthen their portfolios, while our collections 
+         division pairs firm recovery strategies with dignity for every debtor,
+         protecting our clients' reputations. Together, these pillars — building revenue 
+        and recovering what's due — are backed by ethical, innovative 
+        strategies that position us for growth in a market that values integrity and transparency.
+        </p>
+      </div>
+      <div>
+        <div class="nkmb-photo">
+          <img src="{% static 'img/office-sign.jpg' %}" alt="Nokamabovu Credit Solutions office signage">
+        </div>
+        <p class="nkmb-photo-caption">Our offices at Anchor House, Braamfontein</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="nkmb-section tint" id="apart">
+    <div class="nkmb-section-head">
+      <h2><span class="nkmb-marker-dot"></span>What sets us apart</h2>
+      <p class="sans">Six reasons institutions trust us with accounts they can't afford to mismanage.</p>
+    </div>
+    <div class="nkmb-apart-row">
+      {% for card in what_sets_us_apart %}
+        <div class="nkmb-apart-card">
+          <div class="step-line"></div>
+          <b class="num sans">{{ card.num }}</b>
+          <h3>{{ card.title }}</h3>
+          <p>{{ card.body }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="nkmb-section" id="who-we-work-with">
+    <div class="nkmb-section-head">
+      <h2><span class="nkmb-marker-dot"></span>Who we work with</h2>
+      <p class="sans">A broad, diverse client base across South Africa's public and private sectors.</p>
+    </div>
+    <div class="svc-core-list">
+      {% for item in who_we_work_with %}
+        <div class="svc-row">
+          <div class="idx sans">{{ item.idx }}</div>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.body }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="svc-tech" id="mission-vision">
+    <div class="svc-tech-grid">
+      <div class="mv-card">
+        <div class="nkmb-section-head stack">
+          <h2>Mission</h2>
+        </div>
+        <p class="sans">
+          To provide innovative, ethical, and results-driven credit solutions — from
+          revenue-generating insurance offerings to effective debt recovery — that help
+          our clients grow responsibly while maintaining compliance and preserving positive
+          customer relationships.
+        </p>
+      </div>
+      <div class="mv-card">
+        <div class="nkmb-section-head stack">
+          <h2>Vision</h2>
+        </div>
+        <p class="sans">
+          To be South Africa's leading Black female-owned credit solutions company, recognized
+          for excellence, integrity, and transformative impact across the credit and recovery
+          industry.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="nkmb-section" id="values">
+    <div class="nkmb-section-head">
+      <h2><span class="nkmb-marker-dot"></span>Our values</h2>
+      <p class="sans">Five values that shape how our team shows up, on every call and every account.</p>
+    </div>
+    <div class="nkmb-values">
+      {% for value in values %}
+        <div class="nkmb-value"><h4>{{ value.title }}</h4><p>{{ value.body }}</p></div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="nkmb-cta-strip">
+    <div>
+      <h2><span class="nkmb-marker-dot"></span>See how this plays out in practice.</h2>
+      <p>Our values are the backdrop — here's the actual work we do, and how to start a conversation.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start;">
+      <a class="btn-primary" href="{% url 'services' %}">See our services</a>
+      <a href="{% url 'contact' %}" style="color:#fff; opacity:0.8; font-family:'Inter',sans-serif; font-size:13.5px;">Get in touch →</a>
+    </div>
+  </section>
+
+{% endblock %}

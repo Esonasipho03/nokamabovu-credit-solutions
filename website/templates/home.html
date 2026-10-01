@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Nokamabovu Credit Solutions — Home{% endblock %}
+{% block content %}
+
+  <section class="nkmb-hero">
+    <div class="nkmb-hero-bg">
+      <img class="nkmb-hero-photo" src="{% static 'img/hero-bg.jpg' %}" alt="">
+      <div class="nkmb-hero-scrim"></div>
+      <img class="nkmb-watermark" src="{% static 'img/logo-icon.png' %}" alt="" aria-hidden="true">
+      <svg class="nkmb-hero-graph" viewBox="0 0 420 300" preserveAspectRatio="xMaxYMax meet" fill="none">
+        <line x1="0" y1="300" x2="420" y2="0" stroke="#EDDDD3" stroke-width="1"/>
+        <polyline class="draw-line" points="20,260 100,220 160,235 230,150 300,170 390,40"
+          stroke="#A14823" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle class="draw-dot" cx="390" cy="40" r="6" fill="#E06431"/>
+        <text class="draw-label label-start" x="20" y="285" font-family="Inter,sans-serif" font-size="11" fill="#A14823">2015</text>
+        <text class="draw-label label-end" x="365" y="30" font-family="Inter,sans-serif" font-size="11" fill="#A14823">Today</text>
+      </svg>
+    </div>
+    <div class="nkmb-hero-left">
+      <div class="nkmb-eyebrow-row sans"><span class="dot"></span> Established 2015 · 100% Black Female-Owned · B-BBEE Level 1</div>
+      <h1>Recovering Revenue. Creating Opportunities. Driving <em>Growth</em>.</h1>
+      <div class="nkmb-divisions-row sans">Debt Recovery Specialists&nbsp;&nbsp;·&nbsp;&nbsp;Vehicle Tracking Solutions&nbsp;&nbsp;·&nbsp;&nbsp;Car Insurance Solutions</div>
+      <p class="sans">From debt recovery to vehicle tracking and car insurance — we help you protect what you have, and grow what's next.</p>
+      <div class="nkmb-cta-row">
+        <a class="btn-primary" href="#contact">Request a proposal</a>
+        <a class="btn-ghost" href="{% url 'services' %}">See our services</a>
+      </div>
+      <div class="nkmb-scroll-cue">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5 L7 10 L12 5" stroke="#A14823" stroke-width="2" fill="none"/></svg>
+        More below — or jump straight to a section
+      </div>
+    </div>
+  </section>
+
+  <nav class="nkmb-quicknav" aria-label="Jump to section">
+    <a href="{% url 'services' %}">What we do</a>
+    {% if testimonials %}<a href="#testimonials">Testimonials</a>{% endif %}
+    <a href="{% url 'about' %}">Who we are</a>
+    <a href="#contact">Get in touch</a>
+  </nav>
+
+  <div class="nkmb-stats sans">
+    {% for stat in stats %}
+      <div><b>{{ stat.value }}</b><span>{{ stat.label }}</span></div>
+    {% endfor %}
+  </div>
+
+  <section class="nkmb-section" id="what-we-do">
+    <div class="nkmb-section-head">
+      <h2><span class="nkmb-marker-dot"></span>What we do</h2>
+      <p class="sans">Three divisions, one standard: ethical, results-driven service.</p>
+    </div>
+    <div class="nkmb-photo-pair reverse">
+      <div>
+        <div class="svc-core-list">
+          {% for item in what_we_do %}
+            <div class="svc-row svc-row-compact">
+              <div class="idx sans">{{ item.idx }}</div>
+              <h3>{{ item.title }}</h3>
+            </div>
+          {% endfor %}
+        </div>
+        <p class="sans" style="margin-top:36px;">
+          <a class="btn-primary" href="{% url 'services' %}">See all services</a>
+        </p>
+      </div>
+      <div>
+        <div class="nkmb-photo wide" style="max-width:560px;">
+          <img src="{% static 'img/whatwedo.jpg' %}" alt="Nokamabovu agent working at her desk">
+        </div>
+        <p class="nkmb-photo-caption">Our call centre team, engaging every account directly</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="nkmb-section tint" id="why-us">
+    <div class="nkmb-section-head">
+      <h2><span class="nkmb-marker-dot"></span>Why choose Nokamabovu</h2>
+    </div>
+    <p class="sans" style="max-width:60ch;">
+      We don't just manage accounts — we create value. From recovering outstanding
+      revenue to generating new sales opportunities, Nokamabovu helps businesses turn
+      every interaction into a step toward growth.
+      <a href="{% url 'about' %}" style="color:var(--orange-dark); font-weight:600;">Read our story →</a>
+    </p>
+  </section>
+
+{% if testimonials %}
+  <section class="nkmb-section" id="testimonials">
+    <div class="nkmb-section-head">
+      <h2><span class="nkmb-marker-dot"></span>What clients say</h2>
+      <p class="sans">A few words from the institutions we work with.</p>
+    </div>
+    <div class="nkmb-testimonial-slider" id="testimonial-slider">
+      <div class="nkmb-testimonial-track">
+        {% for t in testimonials %}
+          <div class="nkmb-testimonial-slide">
+            <div class="nkmb-testimonial">
+              <div class="mark">"</div>
+              <blockquote>{{ t.quote }}</blockquote>
+              <cite>— {{ t.name }}, {{ t.role }}{% if t.organisation %}, {{ t.organisation }}{% endif %}</cite>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="nkmb-slide-controls">
+        <button class="nkmb-slide-arrow" data-dir="-1" aria-label="Previous testimonial">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3 L5 8 L10 13" stroke="#2B2320" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nkmb-slide-dots" id="testimonial-dots"></div>
+        <button class="nkmb-slide-arrow" data-dir="1" aria-label="Next testimonial">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3 L11 8 L6 13" stroke="#2B2320" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+  <section class="nkmb-cta-strip" id="contact">
+    <div>
+      <h2><span class="nkmb-marker-dot"></span>Let's talk about your portfolio.</h2>
+      <p>Tell us what you're trying to recover, and we'll show you how a compliant, relationship-first process gets you there.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start;">
+      <a class="btn-primary" href="{% url 'contact' %}">Get in touch →</a>
+      <a href="{% url 'about' %}" style="color:#fff; opacity:0.8; font-family:'Inter',sans-serif; font-size:13.5px;">Who we are →</a>
+    </div>
+  </section>
+
+{% endblock %}

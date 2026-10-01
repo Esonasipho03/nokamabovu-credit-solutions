@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Nokamabovu Credit Solutions{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/nokamabovu.css' %}">
+  <link rel="icon" type="image/png" href="{% static 'img/logo-icon.png' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="nkmb-nav">
+    <a class="nkmb-brand" href="{% url 'home' %}">
+      <img class="nkmb-mark" src="{% static 'img/logo-icon.png' %}" alt="Nokamabovu Credit Solutions">
+      <div class="nkmb-wordmark">
+        <b>Nokamabovu</b>
+        <span>CREDIT SOLUTIONS</span>
+      </div>
+    </a>
+    <div class="nkmb-links">
+      <a href="{% url 'home' %}" class="{% if active == 'home' %}active{% endif %}">Home</a>
+      <a href="{% url 'about' %}" class="{% if active == 'about' %}active{% endif %}">Who We Are</a>
+      <a href="{% url 'services' %}" class="{% if active == 'services' %}active{% endif %}">Services</a>
+      <a href="{% url 'partners' %}" class="{% if active == 'partners' %}active{% endif %}">Clients &amp; Partners</a>
+      <a href="{% url 'contact' %}" class="{% if active == 'contact' %}active{% endif %}">Contact</a>
+    </div>
+    <a class="nkmb-phone" href="tel:+27100183411">010 018 3411</a>
+    <button class="nkmb-burger" id="nkmb-burger" aria-label="Open menu" aria-expanded="false" aria-controls="nkmb-mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nkmb-mobile-menu" id="nkmb-mobile-menu">
+    <a href="{% url 'home' %}" class="{% if active == 'home' %}active{% endif %}">Home</a>
+    <a href="{% url 'about' %}" class="{% if active == 'about' %}active{% endif %}">Who We Are</a>
+    <a href="{% url 'services' %}" class="{% if active == 'services' %}active{% endif %}">Services</a>
+    <a href="{% url 'partners' %}" class="{% if active == 'partners' %}active{% endif %}">Clients &amp; Partners</a>
+    <a href="{% url 'contact' %}" class="{% if active == 'contact' %}active{% endif %}">Contact</a>
+    <a class="nkmb-mobile-phone" href="tel:+27100183411">010 018 3411</a>
+  </div>
+
+  {% block content %}{% endblock %}
+
+  <button class="nkmb-back-top" id="nkmb-back-top" aria-label="Back to top">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 10 L8 5 L13 10" stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <div class="nkmb-footer">
+    <div class="nkmb-footer-grid">
+      <div>
+        <h5>Nokamabovu Credit Solutions (Pty) Ltd</h5>
+        <p>B-BBEE Level 1 Contributor<br>100% Black female-owned</p>
+      </div>
+      <div>
+        <h5>Johannesburg (HQ)</h5>
+        <address class="sans">Anchor House, 100 Juta Street,<br>Braamfontein, Johannesburg</address>
+      </div>
+      <div>
+        <h5>Bloemfontein</h5>
+        <address class="sans">Ground Floor, Unipark Building,<br>Vodacom Lane, Nobel Street, Brandwag</address>
+      </div>
+      <div>
+        <h5>East London</h5>
+        <address class="sans">14 Stewart Drive, Berea<br>East London, 5241</address>
+      </div>
+      <div>
+        <h5>Polokwane</h5>
+        <address class="sans">Thabakgolo Building, 3rd Floor<br>Landros Mare Street</address>
+      </div>
+      <div>
+        <h5>Durban</h5>
+        <address class="sans">Liberty Life Building, 1st Floor<br>Umhlanga Ridge</address>
+      </div>
+    </div>
+    <div class="nkmb-footer-bottom">
+      <span>
+        Nokamabovu Credit Solutions (Pty) Ltd · Reg. No. 2015/159073/07 ·
+        <a href="mailto:info@nokamabovu.co.za">info@nokamabovu.co.za</a> ·
+        <a href="tel:+27100183411">010 018 3411</a>
+      </span>
+      <span class="nkmb-footer-legal">
+        <a href="{% url 'privacy' %}">Privacy Policy</a> ·
+        <a href="{% url 'privacy' %}#paia">PAIA Manual</a> ·
+        Your Partner in Recovery, Sales &amp; Growth.
+      </span>
+    </div>
+  </div>
+
+  <script src="{% static 'js/hero-graph.js' %}" defer></script>
+  <script src="{% static 'js/mobile-menu.js' %}" defer></script>
+  <script src="{% static 'js/testimonial-slider.js' %}" defer></script>
+  <script src="{% static 'js/back-to-top.js' %}" defer></script>
+</body>
+</html>

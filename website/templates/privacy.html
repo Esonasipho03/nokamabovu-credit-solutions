@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Privacy Policy — Nokamabovu Credit Solutions{% endblock %}
+{% block content %}
+<div class="legal-page">
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: {{ last_updated }}</p>
+
+  <p>
+    Nokamabovu Credit Solutions (Pty) Ltd (Reg. No. 2015/159073/07) respects your privacy.
+    This policy explains what personal information we collect, why we collect it, and how
+    we protect it, in line with the Protection of Personal Information Act, 2013 (POPIA).
+  </p>
+
+  <h2>1. Information we collect</h2>
+  <ul>
+    <li><strong>Website enquiries:</strong> your name, email address, phone number, company and
+      message when you use our contact form.</li>
+    <li><strong>Client portfolios:</strong> account and contact details of customers that our
+      clients (such as schools, municipalities and healthcare providers) hand over to us
+      for collection, under a written agreement with that client.</li>
+    <li><strong>Calls and messages:</strong> call recordings and records of SMS, WhatsApp and
+      email contact, kept for quality, training and compliance purposes.</li>
+  </ul>
+
+  <h2>2. Why we use it</h2>
+  <ul>
+    <li>To respond to your enquiry or prepare a proposal.</li>
+    <li>To collect outstanding accounts on behalf of our clients, and to agree repayment
+      arrangements.</li>
+    <li>To meet our legal and regulatory obligations.</li>
+  </ul>
+  <p>We do not sell your personal information. We only use it for the purpose it was collected for.</p>
+
+  <h2>3. Who we share it with</h2>
+  <p>
+    We only share personal information with the client who placed the account with us,
+    with service providers who help us operate (for example IT, telephony and messaging
+    providers) under confidentiality agreements, and with authorities where the law
+    requires it.
+  </p>
+
+  <h2>4. How we protect it</h2>
+  <p>
+    We use reasonable technical and organisational measures to keep personal information
+    secure, including access controls, secure systems and staff confidentiality
+    undertakings. We keep information only for as long as we need it for the purpose
+    it was collected for, or as the law requires.
+  </p>
+
+  <h2>5. Your rights</h2>
+  <p>Under POPIA you have the right to:</p>
+  <ul>
+    <li>ask whether we hold personal information about you, and request a copy of it;</li>
+    <li>ask us to correct or delete information that is wrong, out of date or unlawfully held;</li>
+    <li>object to us processing your information in certain circumstances;</li>
+    <li>lodge a complaint with the Information Regulator.</li>
+  </ul>
+
+  <h2>6. Our Information Officer</h2>
+  <p>To exercise any of your rights, or if you have a question about this policy, contact:</p>
+  <div class="legal-box">
+    <p><strong>{{ information_officer.name }}</strong>, Information Officer</p>
+    <p>Email: <a href="mailto:{{ information_officer.email }}">{{ information_officer.email }}</a></p>
+    <p>Phone: <a href="tel:+27100183411">{{ information_officer.phone }}</a></p>
+    <p>Anchor House, 100 Juta Street, Braamfontein, Johannesburg</p>
+  </div>
+  <p>
+    If you are not satisfied with our response, you may contact the Information Regulator
+    (South Africa) at <a href="https://inforegulator.org.za" target="_blank" rel="noopener">inforegulator.org.za</a>.
+  </p>
+
+  <h2 id="paia">7. PAIA Manual</h2>
+  <p>
+    Our manual in terms of section 51 of the Promotion of Access to Information Act, 2000
+    (PAIA) explains how to request access to records we hold.
+    {# Once the client provides the PDF, put it in static/docs/ and swap the line below for: #}
+    {# <a href="{% static 'docs/nokamabovu-paia-manual.pdf' %}">Download our PAIA Manual (PDF)</a> #}
+    A copy is available on request from our Information Officer at the details above.
+  </p>
+
+  <h2>8. Changes to this policy</h2>
+  <p>We may update this policy from time to time. The latest version will always be on this page.</p>
+</div>
+{% endblock %}

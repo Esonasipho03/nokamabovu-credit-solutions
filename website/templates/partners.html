@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Clients &amp; Partners — Nokamabovu Credit Solutions{% endblock %}
+{% block content %}
+
+  <section class="nkmb-hero">
+    <div class="nkmb-hero-bg">
+      <img class="nkmb-hero-photo" src="{% static 'img/office-entrance.jpg' %}" alt="" style="object-position:center 60%;">
+      <div class="nkmb-hero-scrim"></div>
+    </div>
+    <div class="nkmb-hero-left">
+      <h1>Clients &amp; partners.</h1>
+      <p class="sans">The institutions that trust us with their accounts, and the brands we work with to protect what matters to our customers.</p>
+      <div class="nkmb-scroll-cue">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 5 L7 10 L12 5" stroke="#A14823" stroke-width="2" fill="none"/></svg>
+        More below — or jump straight to a section
+      </div>
+    </div>
+  </section>
+
+  <nav class="nkmb-quicknav" aria-label="Jump to section">
+    <a href="#clients">Our clients</a>
+    <a href="#partners">Our partners</a>
+    <a href="#work-with-us">Work with us</a>
+  </nav>
+
+  <section class="nkmb-section" id="clients">
+    <div class="nkmb-section-head">
+      <h2><span class="nkmb-marker-dot"></span>Our clients</h2>
+      <p class="sans">Schools, colleges and training institutions that rely on us for ethical, effective fee recovery.</p>
+    </div>
+    <ul class="logo-grid">
+      {% for c in clients %}
+      <li class="logo-card">
+        <div class="logo-frame">
+          <img src="{% static 'img/logos/'|add:c.logo %}" alt="{{ c.name }} logo">
+        </div>
+        <h3>{{ c.name }}</h3>
+        <p>{{ c.sector }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="nkmb-section tint" id="partners">
+    <div class="nkmb-section-head">
+      <h2><span class="nkmb-marker-dot"></span>Our partners</h2>
+      <p class="sans">The insurance and vehicle tracking brands behind our sales division.</p>
+    </div>
+    <ul class="logo-grid">
+      {% for p in partners %}
+      <li class="logo-card">
+        <div class="logo-frame">
+          <img src="{% static 'img/logos/'|add:p.logo %}" alt="{{ p.name }} logo">
+        </div>
+        <h3>{{ p.name }}</h3>
+        <p>{{ p.sector }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+    <p class="logo-note sans">All logos and trademarks belong to their respective owners and are shown with permission.</p>
+  </section>
+
+  <section class="nkmb-cta-strip" id="work-with-us">
+    <div>
+      <h2><span class="nkmb-marker-dot"></span>Want to join them?</h2>
+      <p>Whether you need accounts recovered or want to partner with our sales team, let's talk.</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start;">
+      <a class="btn-primary" href="{% url 'contact' %}">Get in touch →</a>
+      <a href="{% url 'services' %}" style="color:#fff; opacity:0.8; font-family:'Inter',sans-serif; font-size:13.5px;">See our services →</a>
+    </div>
+  </section>
+
+{% endblock %}

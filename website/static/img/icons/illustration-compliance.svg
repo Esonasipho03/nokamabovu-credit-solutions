@@ -1,0 +1,18 @@
+<svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="500" fill="#FEFCFA"/>
+  <!-- shield -->
+  <path d="M200 90 L290 120 V220 C290 300 250 350 200 380 C150 350 110 300 110 220 V120 Z"
+        fill="#FFFFFF" stroke="#2B2320" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M165 225 l25 25 l55 -60" stroke="#E06431" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- stacked documents below -->
+  <rect x="120" y="400" width="90" height="70" rx="4" fill="#FFFFFF" stroke="#EDDDD3" stroke-width="3"/>
+  <line x1="132" y1="420" x2="198" y2="420" stroke="#EDDDD3" stroke-width="4"/>
+  <line x1="132" y1="435" x2="188" y2="435" stroke="#EDDDD3" stroke-width="4"/>
+  <line x1="132" y1="450" x2="178" y2="450" stroke="#EDDDD3" stroke-width="4"/>
+
+  <rect x="190" y="415" width="90" height="70" rx="4" fill="#FFFFFF" stroke="#A14823" stroke-width="3"/>
+  <line x1="202" y1="435" x2="268" y2="435" stroke="#A14823" stroke-width="4"/>
+  <line x1="202" y1="450" x2="258" y2="450" stroke="#EDDDD3" stroke-width="4"/>
+  <line x1="202" y1="465" x2="248" y2="465" stroke="#EDDDD3" stroke-width="4"/>
+</svg>
