@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: nokamabovu-credit-solutions
+    runtime: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn nokamabovu_project.wsgi:application"
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DJANGO_ALLOWED_HOSTS
+        value: "nokamabovu.co.za,www.nokamabovu.co.za"
+      - key: PYTHON_VERSION
+        value: "3.12.0"

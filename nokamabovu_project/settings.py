@@ -32,7 +32,7 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = os.environ.get(
     "DJANGO_ALLOWED_HOSTS",
-    "nokamabovu.co.za,www.nokamabovu.co.za,localhost,127.0.0.1,192.168.101.123",
+    "nokamabovu.co.za,www.nokamabovu.co.za,localhost,127.0.0.1,192.168.101.182",
 ).split(",")
 
 
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -124,6 +125,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+    },
+}
+
+# Render sits behind a proxy that terminates HTTPS, so trust its forwarded
+# protocol header, and allow the Render-assigned hostname.
+CSRF_TRUSTED_ORIGINS = os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",") if os.environ.get("DJANGO_CSRF_TRUSTED_ORIGINS") else []
+RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+    CSRF_TRUSTED_ORIGINS.append(f"https://{RENDER_EXTERNAL_HOSTNAME}")
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Email
