@@ -637,3 +637,55 @@ img{ max-width:100%; display:block; }
   .logo-frame img{ max-height:84px; }
   .logo-card h3{ font-size:14px; }
 }
+
+/* === Careers page === */
+/* ---------- Careers page ---------- */
+.car-benefits{ display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px; }
+.car-benefit{ display:flex; flex-direction:column; gap:14px; padding:30px 30px 32px; border:1px solid var(--line); border-radius:14px; background:#fff; transition:transform .2s ease, box-shadow .2s ease; }
+.car-benefit:hover{ transform:translateY(-3px); box-shadow:0 12px 28px rgba(43,35,32,0.10); }
+.car-benefit .badge{ width:56px; height:56px; border-radius:14px; background:var(--orange); display:flex; align-items:center; justify-content:center; margin-bottom:4px; }
+.car-benefit h3{ margin:0; font-size:16px; }
+.car-benefit p{ margin:0; font-family:'Inter',sans-serif; font-size:13.5px; line-height:1.6; color:var(--muted); }
+
+.car-toolbar{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; margin-bottom:28px; font-family:'Inter',sans-serif; }
+.car-chips{ display:flex; flex-wrap:wrap; gap:10px; }
+.car-chip{ min-height:44px; padding:0 20px; border-radius:22px; border:1px solid var(--line); background:#fff; color:var(--ink); font-family:'Inter',sans-serif; font-size:13px; font-weight:600; cursor:pointer; transition:border-color .18s ease; }
+.car-chip:hover{ border-color:var(--orange); }
+.car-chip.is-on{ background:var(--ink); border-color:var(--ink); color:#fff; }
+.car-count{ font-size:13px; font-weight:600; color:var(--muted); }
+
+.car-list{ display:flex; flex-direction:column; gap:18px; }
+.car-role{ display:flex; flex-direction:column; gap:20px; padding:26px 30px; border:1px solid var(--line); border-radius:16px; background:#fff; box-shadow:0 10px 30px rgba(43,35,32,0.06); }
+.car-role[hidden], .car-empty[hidden]{ display:none; }
+.car-role-top{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:18px; }
+.car-role-main{ flex:1 1 340px; min-width:0; display:flex; flex-direction:column; gap:12px; }
+.car-role-title{ display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
+.car-role-title h3{ margin:0; font-size:21px; font-weight:600; line-height:1.25; }
+.car-tag{ display:inline-flex; padding:3px 10px; border-radius:20px; font-family:'Inter',sans-serif; font-size:12px; font-weight:700; }
+.car-tag.new{ background:#E3F3E8; color:#1B5B33; }
+.car-tag.soon{ background:#FCE5D8; color:#8A3A18; }
+.car-meta{ display:flex; flex-wrap:wrap; align-items:center; gap:8px 10px; font-family:'Inter',sans-serif; }
+.car-meta span{ padding:7px 15px; border-radius:20px; border:1px solid var(--line); color:var(--ink); font-size:13px; }
+.car-meta span.dept{ background:var(--orange-tint); border-color:var(--orange-tint-2); color:var(--orange-deep); font-weight:600; }
+.car-meta span.closes{ border:none; padding:0; color:var(--muted); }
+.car-actions{ display:flex; flex-wrap:wrap; align-items:center; gap:12px; font-family:'Inter',sans-serif; }
+.car-toggle{ display:inline-flex; align-items:center; gap:8px; min-height:48px; padding:0 20px; border-radius:10px; border:1px solid var(--line); background:#fff; color:var(--ink); font-family:'Inter',sans-serif; font-size:15px; font-weight:600; cursor:pointer; transition:border-color .18s ease; }
+.car-toggle:hover{ border-color:var(--orange); }
+.car-toggle svg{ transition:transform .2s ease; }
+.car-role.is-open .car-toggle svg{ transform:rotate(180deg); }
+.car-detail{ display:none; flex-wrap:wrap; gap:28px 6vw; padding:24px 28px; border-radius:12px; background:var(--orange-tint); border:1px solid var(--orange-tint-2); }
+.car-role.is-open .car-detail{ display:flex; }
+.car-detail > div{ flex:1 1 260px; min-width:0; }
+.car-detail h4{ margin:0 0 10px; font-size:15px; color:var(--orange-dark); }
+.car-detail ul{ margin:0; padding-left:20px; display:flex; flex-direction:column; gap:8px; font-family:'Inter',sans-serif; font-size:14.5px; line-height:1.55; color:var(--ink); }
+.car-empty{ display:flex; flex-direction:column; align-items:flex-start; gap:10px; padding:34px; border:1px dashed #D9BFAE; border-radius:16px; background:#fff; }
+.car-empty h3{ margin:0; font-size:20px; font-weight:600; }
+.car-empty p{ margin:0; font-family:'Inter',sans-serif; font-size:15px; line-height:1.6; color:var(--muted); }
+.car-empty a{ font-family:'Inter',sans-serif; font-size:15px; font-weight:600; }
+.car-consent{ font-family:'Inter',sans-serif; color:#D9CFC8; font-size:13px; line-height:1.5; max-width:52ch; margin:14px 0 0; }
+.car-consent a{ color:#fff; text-decoration:underline; }
+.nkmb-cta-strip .car-cta-links{ display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
+@media (max-width:880px){
+  .car-role{ padding:22px 20px; }
+  .car-detail{ padding:20px; }
+}

@@ -33,20 +33,19 @@
     <div class="nkmb-photo-pair">
       <div>
         <p class="sans" style="font-size:15.5px; color:var(--muted); margin:0 0 20px;">
-          Nokamabovu Credit Solutions (Pty) Ltd is a 100% Black female-owned, B-BBEE Level 1 credit solutions
-          company, established in 2015 on principles of integrity, efficiency, and client-centered
+          Nokamabovu Credit Solutions (Pty) Ltd is a 100% Black female-owned, B-BBEE Level 1 revenue enhancement specialist, established in 2015 on principles of integrity, efficiency, and client-centered
           service. Over time we've grown into a trusted partner for public and private
           institutions, helping them grow through tailored credit and insurance solutions,
-          while also recovering what's already owed — all to the same ethical standard.
+          while also recovering what's already owed, all to the same ethical standard.
         </p>
         <p class="sans" style="font-size:15.5px; color:var(--muted); margin:0;">
          We understand that every client relationship calls for sensitivity, professionalism,
-         and strategic engagement — whether we're growing revenue or recovering what's owed.
-         Our sales services connect public and private institutions with tailored credit 
-         and insurance solutions to strengthen their portfolios, while our collections 
-         division pairs firm recovery strategies with dignity for every debtor,
-         protecting our clients' reputations. Together, these pillars — building revenue 
-        and recovering what's due — are backed by ethical, innovative 
+         and strategic engagement, whether we're growing revenue or recovering what's owed.
+         Our sales services connect public and private institutions with tailored credit
+         and insurance solutions to strengthen their portfolios, while our collections
+         division pairs our recovery strategies with dignity for every debtor,
+         protecting our clients' reputations. Together, these pillars, building revenue
+        and recovering what's due, are backed by ethical, innovative
         strategies that position us for growth in a market that values integrity and transparency.
         </p>
       </div>
@@ -62,7 +61,7 @@
   <section class="nkmb-section tint" id="apart">
     <div class="nkmb-section-head">
       <h2><span class="nkmb-marker-dot"></span>What sets us apart</h2>
-      <p class="sans">Six reasons institutions trust us with accounts they can't afford to mismanage.</p>
+      <p class="sans">Six reasons institutions rely on us when getting it right matters most.</p>
     </div>
     <div class="nkmb-apart-row">
       {% for card in what_sets_us_apart %}
@@ -99,8 +98,8 @@
           <h2>Mission</h2>
         </div>
         <p class="sans">
-          To provide innovative, ethical, and results-driven credit solutions — from
-          revenue-generating insurance offerings to effective debt recovery — that help
+          To provide innovative, ethical, and results-driven credit solutions, from
+          revenue-generating insurance offerings to effective debt recovery, that help
           our clients grow responsibly while maintaining compliance and preserving positive
           customer relationships.
         </p>
@@ -121,11 +120,15 @@
   <section class="nkmb-section" id="values">
     <div class="nkmb-section-head">
       <h2><span class="nkmb-marker-dot"></span>Our values</h2>
-      <p class="sans">Five values that shape how our team shows up, on every call and every account.</p>
+      <p class="sans">The principles that guide how we show up for our clients and as an organisation.</p>
     </div>
+
     <div class="nkmb-values">
       {% for value in values %}
-        <div class="nkmb-value"><h4>{{ value.title }}</h4><p>{{ value.body }}</p></div>
+        <div class="nkmb-value">
+          <h4>{{ value.title }}</h4>
+          <p>{{ value.body }}</p>
+        </div>
       {% endfor %}
     </div>
   </section>
@@ -133,7 +136,8 @@
   <section class="nkmb-cta-strip">
     <div>
       <h2><span class="nkmb-marker-dot"></span>See how this plays out in practice.</h2>
-      <p>Our values are the backdrop — here's the actual work we do, and how to start a conversation.</p>
+      <p>Our values are the backdrop.</p>
+      <p>Here's the actual work we do, and how to start a conversation.</p>
     </div>
     <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start;">
       <a class="btn-primary" href="{% url 'services' %}">See our services</a>

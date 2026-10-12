@@ -70,8 +70,8 @@ def about(request):
             {"num": "01", "title": "Ethical conduct",
              "body": "Every interaction is professional, respectful, and never coercive."},
             {"num": "02", "title": "Transformation & impact",
-             "body": "A B-BBEE Level 1 contributor, 100% Black female-owned, and a YES Programme partner "
-                     "creating skills and jobs for unemployed youth."},
+             "body": "100% Black female-owned and a YES Programme partner, "
+                     "pioneering unemployed youth."},
             {"num": "03", "title": "Client-centric focus",
              "body": "Strategies built around your portfolio, not a one-size template."},
             {"num": "04", "title": "Proven results",
@@ -82,11 +82,18 @@ def about(request):
              "body": "NCA, POPIA and Debt Collectors Act compliant, always."},
         ],
         "values": [
-            {"title": "Integrity", "body": "Honesty, transparency and fairness in every dealing."},
-            {"title": "Accountability", "body": "We take full responsibility for the results we deliver."},
-            {"title": "Excellence", "body": "Continuous improvement in performance and method."},
-            {"title": "Respect", "body": "Every client and debtor treated with dignity."},
-            {"title": "Empowerment", "body": "Inclusivity, transformation and female leadership."},
+            {"title": "Respect",
+             "body": "Every client and debtor is treated with dignity — protecting your reputation in every interaction."},
+            {"title": "Integrity",
+             "body": "You'll always know exactly where your accounts stand. Honest, transparent reporting, no surprises."},
+            {"title": "Excellence",
+             "body": "We measure ourselves by your recovery rate. Continuous improvement means better results for your portfolio."},
+            {"title": "Accountability",
+             "body": "We take full responsibility for the results we deliver — no excuses, only outcomes."},
+            {"title": "Empowerment",
+             "body": "Inclusivity, transformation and female leadership at every level of our organisation."},
+            {"title": "Compliance",
+             "body": "NCA, POPIA and Debt Collectors Act compliant in every process, protecting both you and your debtors."},
         ],
     }
     return render(request, "about.html", context)
@@ -247,3 +254,75 @@ def privacy(request):
         "last_updated": "October 2026",
     }
     return render(request, "privacy.html", context)
+def careers(request):
+    # Sample vacancies: replace with the real roles (or move them to a model/admin later).
+    vacancies = [
+        {"id": "debt-agent", "title": "Debt Recovery Agent", "dept": "Debt recovery",
+         "location": "Johannesburg (HQ)", "type": "Full-time", "closes": "16 Oct 2026", "tag": "Closing soon",
+         "resp": ["Contact customers by phone to agree affordable repayment arrangements",
+                  "Record every conversation accurately on our system",
+                  "Treat every customer with respect and follow our compliance standards"],
+         "reqs": ["Matric certificate",
+                  "Clear, confident phone manner in English and one other local language",
+                  "Comfortable working to daily targets"]},
+        {"id": "insurance-consultant", "title": "Car Insurance Sales Consultant", "dept": "Car insurance",
+         "location": "Johannesburg (HQ)", "type": "Full-time", "closes": "30 Oct 2026", "tag": "New",
+         "resp": ["Speak to customers about our car insurance solutions and answer their questions",
+                  "Prepare clear, no-obligation quotes and follow up on enquiries",
+                  "Meet monthly sales targets"],
+         "reqs": ["Matric certificate; sales experience is an advantage",
+                  "Strong listening and communication skills",
+                  "Willing to complete the required product training"]},
+        {"id": "team-leader", "title": "Call Centre Team Leader", "dept": "Debt recovery",
+         "location": "Durban", "type": "Full-time", "closes": "13 Nov 2026", "tag": "",
+         "resp": ["Coach and support a team of agents day to day",
+                  "Track team performance and report on results",
+                  "Handle escalated customer queries"],
+         "reqs": ["Previous call centre or collections experience",
+                  "Experience leading or mentoring others",
+                  "Good reporting and organising skills"]},
+        {"id": "support-admin", "title": "Customer & Legal Support Administrator", "dept": "Support",
+         "location": "Bloemfontein", "type": "Contract", "closes": "20 Nov 2026", "tag": "",
+         "resp": ["Support customers and the sales and collections teams with daily queries",
+                  "Prepare and file customer and legal documents",
+                  "Keep account information accurate and up to date"],
+         "reqs": ["Matric certificate",
+                  "Accurate data capture and attention to detail",
+                  "Working knowledge of Microsoft Office"]},
+    ]
+    for r in vacancies:
+        r["subject"] = "Application: " + r["title"]
+    context = {
+        "active": "careers",
+        "vacancies": vacancies,
+        "categories": ["Debt recovery", "Car insurance", "Support"],
+        "benefits": [
+            {"icon": "cap", "title": "Paid training and onboarding", "body": "Learn our systems, processes and compliance basics before you take your first call."},
+            {"icon": "growth", "title": "Room to grow", "body": "We prefer promoting from within, so strong performers move up into senior and leadership roles."},
+            {"icon": "screen", "title": "Modern tools", "body": "CRM, automated dialing and analytics sit behind every campaign, so you spend your time on the conversation."},
+            {"icon": "clock", "title": "Predictable hours", "body": "Stable weekday schedules so you can plan your week, your studies and your family time."},
+            {"icon": "team", "title": "A supportive, female-led team", "body": "Founded and led by a 100% Black female-owned team since 2015, with leaders who coach you from day one."},
+            {"icon": "award", "title": "Skills and jobs for young people", "body": "As a B-BBEE Level 1 contributor and YES Programme partner, we create skills and job opportunities for unemployed youth."},
+        ],
+        "hire_steps": [
+            {"title": "Apply", "body": "Send your CV via email."},
+            {"title": "Get feedback", "body": "You will get a reply within 7 business days by email or call, along with an interview request."},
+            {"title": "Interview", "body": "Meet our HR team and receive an offer."},
+            {"title": "Begin training", "body": "Meet your team and your team leader."},
+        ],
+        "faqs": [
+            {"q": "Do I need experience?", "a": "Not always. Many roles include paid training, and as a YES Programme partner we also create skills and job opportunities for unemployed youth."},
+            {"q": "How long until I hear back?", "a": "We aim to respond to every application within 7 business days of receiving it."},
+            {"q": "What should I include?", "a": "Your CV, the role you're applying for, your contact number and the city you'd like to work in."},
+            {"q": "Can I apply for more than one role?", "a": "Yes. Mention each role in your email and we'll consider you for all of them."},
+        ],
+        "values": [
+            {"title": "Integrity", "body": "Honesty, transparency and fairness in every dealing."},
+            {"title": "Accountability", "body": "We take full responsibility for the results we deliver."},
+            {"title": "Excellence", "body": "Continuous improvement in performance and method."},
+            {"title": "Respect", "body": "Every client and debtor treated with dignity."},
+            {"title": "Empowerment", "body": "Inclusivity, transformation and female leadership."},
+        ],
+    }
+    return render(request, "careers.html", context)
+
