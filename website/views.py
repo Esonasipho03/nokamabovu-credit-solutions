@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.mail import EmailMessage
 from django.shortcuts import render
 
 
@@ -159,16 +161,39 @@ def contact(request):
         if request.POST.get("consent") != "yes":
             error = "Please tick the consent box so we can respond to your enquiry."
         else:
-            full_name = request.POST.get("full_name")
-            email = request.POST.get("email")
-            phone = request.POST.get("phone")
-            company = request.POST.get("company")
-            message = request.POST.get("message")
-            # NOTE: this only accepts the submission for now — wire this up to
-            # an email service (e.g. django-anymail, SendGrid) to actually
-            # deliver messages.
-            print(f"New inquiry from {full_name} <{email}> ({phone}, {company}): {message} [POPIA consent: yes]")
-            submitted = True
+            full_name = request.POST.get("full_name", "").strip()
+            email = request.POST.get("email", "").strip()
+            phone = request.POST.get("phone", "").strip()
+            company = request.POST.get("company", "").strip()
+            message = request.POST.get("message", "").strip()
+
+            body = (
+                "New enquiry from the Nokamabovu website contact form.\n\n"
+                f"Name: {full_name or '—'}\n"
+                f"Email: {email or '—'}\n"
+                f"Phone: {phone or '—'}\n"
+                f"Company: {company or '—'}\n\n"
+                "Message:\n"
+                f"{message or '—'}\n\n"
+                "POPIA consent: given"
+            )
+            try:
+                mail = EmailMessage(
+                    subject=f"Website enquiry from {full_name or 'a website visitor'}",
+                    body=body,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    to=[settings.CONTACT_RECIPIENT_EMAIL],
+                    reply_to=[email] if email else None,
+                )
+                mail.send(fail_silently=False)
+                submitted = True
+            except Exception:
+                # Don't crash the page if the mail server is down/misconfigured —
+                # show the visitor a plain, honest message instead.
+                error = (
+                    "Sorry — something went wrong sending your message. "
+                    "Please call or WhatsApp us instead, or try again shortly."
+                )
     return render(request, "contact.html", {
         "active": "contact", "submitted": submitted, "error": error,
     })
