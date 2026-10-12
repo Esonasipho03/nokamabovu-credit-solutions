@@ -1,5 +1,3 @@
-from django.conf import settings
-from django.core.mail import EmailMessage
 from django.shortcuts import render
 
 
@@ -70,8 +68,8 @@ def about(request):
             {"num": "01", "title": "Ethical conduct",
              "body": "Every interaction is professional, respectful, and never coercive."},
             {"num": "02", "title": "Transformation & impact",
-             "body": "100% Black female-owned and a YES Programme partner, "
-                     "pioneering unemployed youth."},
+             "body": "A B-BBEE Level 1 contributor, 100% Black female-owned, and a YES Programme partner "
+                     "creating skills and jobs for unemployed youth."},
             {"num": "03", "title": "Client-centric focus",
              "body": "Strategies built around your portfolio, not a one-size template."},
             {"num": "04", "title": "Proven results",
@@ -82,18 +80,11 @@ def about(request):
              "body": "NCA, POPIA and Debt Collectors Act compliant, always."},
         ],
         "values": [
-            {"title": "Respect",
-             "body": "Every client and debtor is treated with dignity — protecting your reputation in every interaction."},
-            {"title": "Integrity",
-             "body": "You'll always know exactly where your accounts stand. Honest, transparent reporting, no surprises."},
-            {"title": "Excellence",
-             "body": "We measure ourselves by your recovery rate. Continuous improvement means better results for your portfolio."},
-            {"title": "Accountability",
-             "body": "We take full responsibility for the results we deliver — no excuses, only outcomes."},
-            {"title": "Empowerment",
-             "body": "Inclusivity, transformation and female leadership at every level of our organisation."},
-            {"title": "Compliance",
-             "body": "NCA, POPIA and Debt Collectors Act compliant in every process, protecting both you and your debtors."},
+            {"title": "Integrity", "body": "Honesty, transparency and fairness in every dealing."},
+            {"title": "Accountability", "body": "We take full responsibility for the results we deliver."},
+            {"title": "Excellence", "body": "Continuous improvement in performance and method."},
+            {"title": "Respect", "body": "Every client and debtor treated with dignity."},
+            {"title": "Empowerment", "body": "Inclusivity, transformation and female leadership."},
         ],
     }
     return render(request, "about.html", context)
@@ -168,39 +159,16 @@ def contact(request):
         if request.POST.get("consent") != "yes":
             error = "Please tick the consent box so we can respond to your enquiry."
         else:
-            full_name = request.POST.get("full_name", "").strip()
-            email = request.POST.get("email", "").strip()
-            phone = request.POST.get("phone", "").strip()
-            company = request.POST.get("company", "").strip()
-            message = request.POST.get("message", "").strip()
-
-            body = (
-                "New enquiry from the Nokamabovu website contact form.\n\n"
-                f"Name: {full_name or '—'}\n"
-                f"Email: {email or '—'}\n"
-                f"Phone: {phone or '—'}\n"
-                f"Company: {company or '—'}\n\n"
-                "Message:\n"
-                f"{message or '—'}\n\n"
-                "POPIA consent: given"
-            )
-            try:
-                mail = EmailMessage(
-                    subject=f"Website enquiry from {full_name or 'a website visitor'}",
-                    body=body,
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    to=[settings.CONTACT_RECIPIENT_EMAIL],
-                    reply_to=[email] if email else None,
-                )
-                mail.send(fail_silently=False)
-                submitted = True
-            except Exception:
-                # Don't crash the page if the mail server is down/misconfigured —
-                # show the visitor a plain, honest message instead.
-                error = (
-                    "Sorry — something went wrong sending your message. "
-                    "Please call or WhatsApp us instead, or try again shortly."
-                )
+            full_name = request.POST.get("full_name")
+            email = request.POST.get("email")
+            phone = request.POST.get("phone")
+            company = request.POST.get("company")
+            message = request.POST.get("message")
+            # NOTE: this only accepts the submission for now — wire this up to
+            # an email service (e.g. django-anymail, SendGrid) to actually
+            # deliver messages.
+            print(f"New inquiry from {full_name} <{email}> ({phone}, {company}): {message} [POPIA consent: yes]")
+            submitted = True
     return render(request, "contact.html", {
         "active": "contact", "submitted": submitted, "error": error,
     })
@@ -254,6 +222,8 @@ def privacy(request):
         "last_updated": "October 2026",
     }
     return render(request, "privacy.html", context)
+
+
 def careers(request):
     # Sample vacancies: replace with the real roles (or move them to a model/admin later).
     vacancies = [
@@ -325,4 +295,3 @@ def careers(request):
         ],
     }
     return render(request, "careers.html", context)
-
