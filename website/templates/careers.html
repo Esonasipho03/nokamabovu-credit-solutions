@@ -128,20 +128,22 @@
       <h2><span class="nkmb-marker-dot"></span>Life at Nokamabovu</h2>
       <p class="sans">Three divisions, one standard: ethical, results-driven service.</p>
     </div>
-    <div class="nkmb-photo-pair" style="grid-template-columns:1fr; max-width:760px; margin-left:0;">
+    <div class="nkmb-photo-pair">
       <div>
         <p class="sans" style="font-size:15.5px; color:var(--muted); margin:0 0 20px;">Every day you'll help people find practical solutions, whether that's settling an account, protecting a vehicle or getting the right cover. You'll work in a female-led team that coaches you, celebrates progress and takes your growth seriously.</p>
         <p class="sans" style="font-size:15.5px; color:var(--muted); margin:0 0 20px;">You'll work with CRM, automated dialing and analytics tools, and every call follows the National Credit Act, POPIA and the Debt Collectors Act. You'll be trained, coached and supported from your first day.</p>
         <a href="{% url 'about' %}" style="font-size:15.5px; font-weight:600; color:var(--orange-dark);">Read our story →</a>
       </div>
+      <div>
+        <div class="car-stack" aria-label="Photos of life at Nokamabovu">
+          <figure class="car-card c1" tabindex="0"><img src="{% static 'img/life-jackets.jpg' %}" alt="The Nokamabovu team together in company jackets" loading="lazy" style="object-position:center 60%;"></figure>
+          <figure class="car-card c2" tabindex="0"><img src="{% static 'img/life-rooftop.jpg' %}" alt="Nokamabovu team members on a city rooftop" loading="lazy"></figure>
+          <figure class="car-card c3" tabindex="0"><img src="{% static 'img/life-soccer.jpg' %}" alt="Nokamabovu team after a soccer match" loading="lazy"></figure>
+          <figure class="car-card c4" tabindex="0"><img src="{% static 'img/life-heritage.jpg' %}" alt="Nokamabovu colleagues in traditional attire on Heritage Day" loading="lazy"></figure>
+        </div>
+        <p class="nkmb-photo-caption" style="text-align:center;">Team days, good company and plenty of energy</p>
+      </div>
     </div>
-    <div class="car-life-gallery">
-      <figure class="car-life-main"><img src="{% static 'img/life-jackets.jpg' %}" alt="The Nokamabovu team together in company jackets" loading="lazy" style="object-position:center 60%;"></figure>
-      <figure><img src="{% static 'img/life-rooftop.jpg' %}" alt="Nokamabovu team members on a city rooftop" loading="lazy"></figure>
-      <figure><img src="{% static 'img/life-soccer.jpg' %}" alt="Nokamabovu team after a soccer match" loading="lazy"></figure>
-      <figure><img src="{% static 'img/life-heritage.jpg' %}" alt="Nokamabovu colleagues in traditional attire on Heritage Day" loading="lazy"></figure>
-    </div>
-    <p class="nkmb-photo-caption">Team days, good company and plenty of energy</p>
   </section>
 
   <section class="nkmb-cta-strip" id="talent-pool">
