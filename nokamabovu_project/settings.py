@@ -32,7 +32,7 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = os.environ.get(
     "DJANGO_ALLOWED_HOSTS",
-    "nokamabovu.co.za,www.nokamabovu.co.za,localhost,127.0.0.1,192.168.101.182",
+    "nokamabovu.co.za,www.nokamabovu.co.za,localhost,127.0.0.1,192.168.101.117",
 ).split(",")
 
 
