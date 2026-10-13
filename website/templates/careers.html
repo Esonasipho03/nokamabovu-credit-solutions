@@ -5,8 +5,8 @@
 
   <section class="nkmb-hero">
     <div class="nkmb-hero-bg">
-      <img class="nkmb-hero-photo" src="{% static 'img/team-1.jpg' %}" alt="" style="object-position:78% 35%;">
-      <div class="nkmb-hero-scrim"></div>
+      <img class="nkmb-hero-photo" src="{% static 'img/team-careers.jpg' %}" alt="The Nokamabovu team in company jackets" style="object-position:62% 45%;">
+      <div class="nkmb-hero-scrim car-hero-scrim"></div>
     </div>
     <div class="nkmb-hero-left">
       <div class="nkmb-eyebrow-row sans"><span class="dot"></span> Now hiring · {{ vacancies|length }} open role{{ vacancies|length|pluralize }} · 100% Black Female-Owned · B-BBEE Level 1</div>
@@ -128,19 +128,20 @@
       <h2><span class="nkmb-marker-dot"></span>Life at Nokamabovu</h2>
       <p class="sans">Three divisions, one standard: ethical, results-driven service.</p>
     </div>
-    <div class="nkmb-photo-pair">
+    <div class="nkmb-photo-pair" style="grid-template-columns:1fr; max-width:760px; margin-left:0;">
       <div>
         <p class="sans" style="font-size:15.5px; color:var(--muted); margin:0 0 20px;">Every day you'll help people find practical solutions, whether that's settling an account, protecting a vehicle or getting the right cover. You'll work in a female-led team that coaches you, celebrates progress and takes your growth seriously.</p>
         <p class="sans" style="font-size:15.5px; color:var(--muted); margin:0 0 20px;">You'll work with CRM, automated dialing and analytics tools, and every call follows the National Credit Act, POPIA and the Debt Collectors Act. You'll be trained, coached and supported from your first day.</p>
         <a href="{% url 'about' %}" style="font-size:15.5px; font-weight:600; color:var(--orange-dark);">Read our story →</a>
       </div>
-      <div>
-        <div class="nkmb-photo wide" style="max-width:560px; margin-left:auto;">
-          <img src="{% static 'img/whatwedo.jpg' %}" alt="A Nokamabovu agent working at her desk">
-        </div>
-        <p class="nkmb-photo-caption" style="margin-left:auto; max-width:560px;">Our call centre team, engaging every account directly</p>
-      </div>
     </div>
+    <div class="car-life-gallery">
+      <figure class="car-life-main"><img src="{% static 'img/life-jackets.jpg' %}" alt="The Nokamabovu team together in company jackets" loading="lazy" style="object-position:center 60%;"></figure>
+      <figure><img src="{% static 'img/life-rooftop.jpg' %}" alt="Nokamabovu team members on a city rooftop" loading="lazy"></figure>
+      <figure><img src="{% static 'img/life-soccer.jpg' %}" alt="Nokamabovu team after a soccer match" loading="lazy"></figure>
+      <figure><img src="{% static 'img/life-heritage.jpg' %}" alt="Nokamabovu colleagues in traditional attire on Heritage Day" loading="lazy"></figure>
+    </div>
+    <p class="nkmb-photo-caption">Team days, good company and plenty of energy</p>
   </section>
 
   <section class="nkmb-cta-strip" id="talent-pool">

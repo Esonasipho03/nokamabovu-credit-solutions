@@ -18,7 +18,7 @@ def home(request):
             {"value": "Level 1", "label": "B-BBEE contributor"},
         ],
         "what_we_do": [
-            {"idx": "01", "title": "Debt Recovery Specialists",
+            {"idx": "01", "title": "Revenue Enhancement Specialists",
              "body": "Outbound collections, skip tracing and legal support for outstanding accounts. "
                      "recovered ethically, in full regulatory compliance."},
             {"idx": "02", "title": "Sales Solutions",
