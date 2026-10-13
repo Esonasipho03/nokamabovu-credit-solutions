@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.mail import EmailMessage
 from django.shortcuts import render
 
 
@@ -17,12 +19,10 @@ def home(request):
         ],
         "what_we_do": [
             {"idx": "01", "title": "Debt Recovery Specialists",
-             "body": "Outbound collections, skip tracing and legal support for outstanding accounts — "
+             "body": "Outbound collections, skip tracing and legal support for outstanding accounts. "
                      "recovered ethically, in full regulatory compliance."},
             {"idx": "02", "title": "Sales Solutions",
              "body": "Vehicle tracking and car insurance solutions, helping you protect what you have."},
-            {"idx": "03", "title": "Customer & Legal Support",
-             "body": "Dedicated customer engagement and legal support across every account and product."},
         ],
         # Only REAL client testimonials go here, and only once the client has
         # given written permission to publish their words and name.
@@ -68,8 +68,8 @@ def about(request):
             {"num": "01", "title": "Ethical conduct",
              "body": "Every interaction is professional, respectful, and never coercive."},
             {"num": "02", "title": "Transformation & impact",
-             "body": "A B-BBEE Level 1 contributor, 100% Black female-owned, and a YES Programme partner "
-                     "creating skills and jobs for unemployed youth."},
+             "body": "100% Black female-owned and a YES Programme partner, "
+                     "pioneering unemployed youth."},
             {"num": "03", "title": "Client-centric focus",
              "body": "Strategies built around your portfolio, not a one-size template."},
             {"num": "04", "title": "Proven results",
@@ -80,11 +80,18 @@ def about(request):
              "body": "NCA, POPIA and Debt Collectors Act compliant, always."},
         ],
         "values": [
-            {"title": "Integrity", "body": "Honesty, transparency and fairness in every dealing."},
-            {"title": "Accountability", "body": "We take full responsibility for the results we deliver."},
-            {"title": "Excellence", "body": "Continuous improvement in performance and method."},
-            {"title": "Respect", "body": "Every client and debtor treated with dignity."},
-            {"title": "Empowerment", "body": "Inclusivity, transformation and female leadership."},
+            {"title": "Respect",
+             "body": "Every client and debtor is treated with dignity — protecting your reputation in every interaction."},
+            {"title": "Integrity",
+             "body": "You'll always know exactly where your accounts stand. Honest, transparent reporting, no surprises."},
+            {"title": "Excellence",
+             "body": "We measure ourselves by your recovery rate. Continuous improvement means better results for your portfolio."},
+            {"title": "Accountability",
+             "body": "We take full responsibility for the results we deliver — no excuses, only outcomes."},
+            {"title": "Empowerment",
+             "body": "Inclusivity, transformation and female leadership at every level of our organisation."},
+            {"title": "Compliance",
+             "body": "NCA, POPIA and Debt Collectors Act compliant in every process, protecting both you and your debtors."},
         ],
     }
     return render(request, "about.html", context)
@@ -99,7 +106,7 @@ def services(request):
                      "settlement negotiation throughout."},
             {"idx": "02", "title": "Revenue Enhancement & Credit Control",
              "body": "A review of your collection strategy, debit order success rates and arrear "
-                     "management policies — with concrete recommendations to reduce future defaults."},
+                     "management policies, with concrete recommendations to reduce future defaults."},
             {"idx": "03", "title": "Call Centre & Customer Engagement",
              "body": "A dedicated, supervised team running multi-channel contact campaigns with "
                      "quality assurance and daily productivity monitoring."},
@@ -126,7 +133,7 @@ def services(request):
         ],
         "sales_process_steps": [
             {"tag": "1", "title": "Enquiry & needs assessment",
-             "body": "Understand what you're looking to protect — your vehicle, yourself, or both — "
+             "body": "Understand what you're looking to protect, whether your vehicle, yourself, or both, "
                      "and match it to the right solution."},
             {"tag": "2", "title": "Quote & recommendation",
              "body": "A clear, no-obligation quote and recommendation based on your needs and budget."},
@@ -159,16 +166,39 @@ def contact(request):
         if request.POST.get("consent") != "yes":
             error = "Please tick the consent box so we can respond to your enquiry."
         else:
-            full_name = request.POST.get("full_name")
-            email = request.POST.get("email")
-            phone = request.POST.get("phone")
-            company = request.POST.get("company")
-            message = request.POST.get("message")
-            # NOTE: this only accepts the submission for now — wire this up to
-            # an email service (e.g. django-anymail, SendGrid) to actually
-            # deliver messages.
-            print(f"New inquiry from {full_name} <{email}> ({phone}, {company}): {message} [POPIA consent: yes]")
-            submitted = True
+            full_name = request.POST.get("full_name", "").strip()
+            email = request.POST.get("email", "").strip()
+            phone = request.POST.get("phone", "").strip()
+            company = request.POST.get("company", "").strip()
+            message = request.POST.get("message", "").strip()
+
+            body = (
+                "New enquiry from the Nokamabovu website contact form.\n\n"
+                f"Name: {full_name or '—'}\n"
+                f"Email: {email or '—'}\n"
+                f"Phone: {phone or '—'}\n"
+                f"Company: {company or '—'}\n\n"
+                "Message:\n"
+                f"{message or '—'}\n\n"
+                "POPIA consent: given"
+            )
+            try:
+                mail = EmailMessage(
+                    subject=f"Website enquiry from {full_name or 'a website visitor'}",
+                    body=body,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    to=[settings.CONTACT_RECIPIENT_EMAIL],
+                    reply_to=[email] if email else None,
+                )
+                mail.send(fail_silently=False)
+                submitted = True
+            except Exception:
+                # Don't crash the page if the mail server is down/misconfigured —
+                # show the visitor a plain, honest message instead.
+                error = (
+                    "Sorry — something went wrong sending your message. "
+                    "Please call or WhatsApp us instead, or try again shortly."
+                )
     return render(request, "contact.html", {
         "active": "contact", "submitted": submitted, "error": error,
     })
@@ -222,8 +252,6 @@ def privacy(request):
         "last_updated": "October 2026",
     }
     return render(request, "privacy.html", context)
-
-
 def careers(request):
     # Sample vacancies: replace with the real roles (or move them to a model/admin later).
     vacancies = [
@@ -251,21 +279,13 @@ def careers(request):
          "reqs": ["Previous call centre or collections experience",
                   "Experience leading or mentoring others",
                   "Good reporting and organising skills"]},
-        {"id": "support-admin", "title": "Customer & Legal Support Administrator", "dept": "Support",
-         "location": "Bloemfontein", "type": "Contract", "closes": "20 Nov 2026", "tag": "",
-         "resp": ["Support customers and the sales and collections teams with daily queries",
-                  "Prepare and file customer and legal documents",
-                  "Keep account information accurate and up to date"],
-         "reqs": ["Matric certificate",
-                  "Accurate data capture and attention to detail",
-                  "Working knowledge of Microsoft Office"]},
     ]
     for r in vacancies:
         r["subject"] = "Application: " + r["title"]
     context = {
         "active": "careers",
         "vacancies": vacancies,
-        "categories": ["Debt recovery", "Car insurance", "Support"],
+        "categories": ["Debt recovery", "Car insurance"],
         "benefits": [
             {"icon": "cap", "title": "Paid training and onboarding", "body": "Learn our systems, processes and compliance basics before you take your first call."},
             {"icon": "growth", "title": "Room to grow", "body": "We prefer promoting from within, so strong performers move up into senior and leadership roles."},
@@ -286,12 +306,6 @@ def careers(request):
             {"q": "What should I include?", "a": "Your CV, the role you're applying for, your contact number and the city you'd like to work in."},
             {"q": "Can I apply for more than one role?", "a": "Yes. Mention each role in your email and we'll consider you for all of them."},
         ],
-        "values": [
-            {"title": "Integrity", "body": "Honesty, transparency and fairness in every dealing."},
-            {"title": "Accountability", "body": "We take full responsibility for the results we deliver."},
-            {"title": "Excellence", "body": "Continuous improvement in performance and method."},
-            {"title": "Respect", "body": "Every client and debtor treated with dignity."},
-            {"title": "Empowerment", "body": "Inclusivity, transformation and female leadership."},
-        ],
     }
     return render(request, "careers.html", context)
+
