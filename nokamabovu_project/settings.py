@@ -162,8 +162,8 @@ EMAIL_TIMEOUT = 10
 
 # The "From" address on outgoing mail, and the inbox the contact form delivers to.
 DEFAULT_FROM_EMAIL = os.environ.get(
-    "DJANGO_DEFAULT_FROM_EMAIL", "Nokamabovu Website <sd@nokamabovu.onmicrosoft.com>"
+    "DJANGO_DEFAULT_FROM_EMAIL", "Nokamabovu Website <info@nokamabovu.co.za>"
 )
 CONTACT_RECIPIENT_EMAIL = os.environ.get(
-    "DJANGO_CONTACT_RECIPIENT_EMAIL", "sd@nokamabovu.onmicrosoft.com"
+    "DJANGO_CONTACT_RECIPIENT_EMAIL", "info@nokamabovu.co.za"
 )
