@@ -2,6 +2,8 @@ from django.conf import settings
 from django.core.mail import EmailMessage
 from django.shortcuts import render
 
+from .models import Vacancy
+
 
 TESTIMONIALS = [
     # Add approved client testimonials here (see the note in home() below).
@@ -253,39 +255,32 @@ def privacy(request):
     }
     return render(request, "privacy.html", context)
 def careers(request):
-    # Sample vacancies: replace with the real roles (or move them to a model/admin later).
-    vacancies = [
-        {"id": "debt-agent", "title": "Debt Recovery Agent", "dept": "Debt recovery",
-         "location": "Johannesburg (HQ)", "type": "Full-time", "closes": "16 Oct 2026", "tag": "Closing soon",
-         "resp": ["Contact customers by phone to agree affordable repayment arrangements",
-                  "Record every conversation accurately on our system",
-                  "Treat every customer with respect and follow our compliance standards"],
-         "reqs": ["Matric certificate",
-                  "Clear, confident phone manner in English and one other local language",
-                  "Comfortable working to daily targets"]},
-        {"id": "insurance-consultant", "title": "Car Insurance Sales Consultant", "dept": "Car insurance",
-         "location": "Johannesburg (HQ)", "type": "Full-time", "closes": "30 Oct 2026", "tag": "New",
-         "resp": ["Speak to customers about our car insurance solutions and answer their questions",
-                  "Prepare clear, no-obligation quotes and follow up on enquiries",
-                  "Meet monthly sales targets"],
-         "reqs": ["Matric certificate; sales experience is an advantage",
-                  "Strong listening and communication skills",
-                  "Willing to complete the required product training"]},
-        {"id": "team-leader", "title": "Call Centre Team Leader", "dept": "Debt recovery",
-         "location": "Durban", "type": "Full-time", "closes": "13 Nov 2026", "tag": "",
-         "resp": ["Coach and support a team of agents day to day",
-                  "Track team performance and report on results",
-                  "Handle escalated customer queries"],
-         "reqs": ["Previous call centre or collections experience",
-                  "Experience leading or mentoring others",
-                  "Good reporting and organising skills"]},
-    ]
-    for r in vacancies:
-        r["subject"] = "Application: " + r["title"]
+    # Vacancies are managed in the Django admin (Website > Vacancies).
+    # Only published posts whose closing date has not passed are shown.
+    posts = [v for v in Vacancy.objects.filter(is_published=True) if v.is_open]
+    vacancies = []
+    for v in posts:
+        vacancies.append({
+            "id": v.pk,
+            "title": v.title,
+            "dept": v.department,
+            "location": v.location,
+            "type": v.job_type,
+            "closes": (f"Closes {v.closing_date.day} {v.closing_date.strftime('%b %Y')}"
+                       if v.closing_date else "Open until filled"),
+            "tag": v.badge,
+            "resp": v.responsibilities_list(),
+            "reqs": v.requirements_list(),
+            "subject": "Application: " + v.title,
+        })
+    categories = []
+    for v in vacancies:
+        if v["dept"] not in categories:
+            categories.append(v["dept"])
     context = {
         "active": "careers",
         "vacancies": vacancies,
-        "categories": ["Debt recovery", "Car insurance"],
+        "categories": categories,
         "benefits": [
             {"icon": "cap", "title": "Paid training and onboarding", "body": "Learn our systems, processes and compliance basics before you take your first call."},
             {"icon": "growth", "title": "Room to grow", "body": "We prefer promoting from within, so strong performers move up into senior and leadership roles."},

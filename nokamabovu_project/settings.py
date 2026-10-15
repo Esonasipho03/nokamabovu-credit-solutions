@@ -82,12 +82,33 @@ WSGI_APPLICATION = 'nokamabovu_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Locally this uses the db.sqlite3 file. On Render, set DATABASE_URL to a Postgres
+# database so vacancies and admin logins survive restarts and redeploys
+# (Render's disk is wiped on every deploy, so SQLite there loses all admin edits).
+_database_url = os.environ.get("DATABASE_URL", "")
+if _database_url:
+    from urllib.parse import parse_qs, unquote, urlparse
+
+    _u = urlparse(_database_url)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': unquote(_u.path.lstrip("/")),
+            'USER': unquote(_u.username or ""),
+            'PASSWORD': unquote(_u.password or ""),
+            'HOST': _u.hostname or "",
+            'PORT': str(_u.port or 5432),
+            'CONN_MAX_AGE': 60,
+            'OPTIONS': {k: v[0] for k, v in parse_qs(_u.query).items()},
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation

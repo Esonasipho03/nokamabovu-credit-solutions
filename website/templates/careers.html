@@ -9,7 +9,7 @@
       <div class="nkmb-hero-scrim car-hero-scrim"></div>
     </div>
     <div class="nkmb-hero-left">
-      <div class="nkmb-eyebrow-row sans"><span class="dot"></span> Now hiring · {{ vacancies|length }} open role{{ vacancies|length|pluralize }} · 100% Black Female-Owned · B-BBEE Level 1</div>
+      <div class="nkmb-eyebrow-row sans"><span class="dot"></span> Now hiring · {% if vacancies %}{{ vacancies|length }} open role{{ vacancies|length|pluralize }} · {% endif %}100% Black Female-Owned · B-BBEE Level 1</div>
       <h1>Build your career with <em>Nokamabovu</em>.</h1>
       <p class="sans">Start your career with a team that trains you, backs you and celebrates your growth. Browse the open roles below, or send us your CV and we'll keep it on file.</p>
       <div class="nkmb-cta-row">
@@ -75,7 +75,7 @@
                 <span class="dept">{{ v.dept }}</span>
                 <span>{{ v.location }}</span>
                 <span>{{ v.type }}</span>
-                <span class="closes">Closes {{ v.closes }}</span>
+                <span class="closes">{{ v.closes }}</span>
               </div>
             </div>
             <div class="car-actions">
@@ -99,7 +99,7 @@
         </div>
       {% endfor %}
 
-      <div class="car-empty" id="car-empty" hidden>
+      <div class="car-empty" id="car-empty"{% if vacancies %} hidden{% endif %}>
         <h3>No open roles in this division right now</h3>
         <p>Try another division, or send us your CV and we'll keep it on file for the next opening.</p>
         <a href="#talent-pool">Send us your CV →</a>
