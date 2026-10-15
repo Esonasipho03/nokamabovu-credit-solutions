@@ -709,3 +709,8 @@ img{ max-width:100%; display:block; }
 .car-card.c4{ width:46%; aspect-ratio:3/4; bottom:3%; right:3%; transform:rotate(4deg); z-index:4; }
 .car-card:hover, .car-card:focus{ transform:rotate(0) scale(1.07); z-index:10; box-shadow:0 22px 44px rgba(40,25,15,.28); }
 @media (prefers-reduced-motion:reduce){ .car-card{ transition:none; } }
+
+/* About hero: photo sits to the right so the first agent is not hidden by the fade */
+.about-hero-photo{ left:auto; right:0; width:72%; object-position:left 22%; }
+.about-hero-scrim{ background:linear-gradient(90deg, var(--paper) 0%, var(--paper) 28%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0.15) 55%, rgba(255,255,255,0) 68%); }
+@media (max-width:820px){ .about-hero-photo{ width:100%; object-position:center 22%; } .about-hero-scrim{ background:linear-gradient(180deg, rgba(255,255,255,0) 50%, var(--paper) 100%); } }
