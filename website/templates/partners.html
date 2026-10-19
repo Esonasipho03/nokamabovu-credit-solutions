@@ -21,6 +21,7 @@
   <nav class="nkmb-quicknav" aria-label="Jump to section">
     <a href="#clients">Our clients</a>
     <a href="#partners">Our partners</a>
+    {% if testimonials %}<a href="#testimonials">Testimonials</a>{% endif %}
     <a href="#work-with-us">Work with us</a>
   </nav>
 
@@ -41,6 +42,45 @@
       {% endfor %}
     </ul>
   </section>
+
+{% if testimonials %}
+  <section class="nkmb-section" id="testimonials">
+    <div class="nkmb-section-head">
+      <h2><span class="nkmb-marker-dot"></span>What clients say</h2>
+      <p class="sans">Words from the institutions and partners we work with.</p>
+    </div>
+    <div class="nkmb-testimonial-slider" id="testimonial-slider">
+      <div class="nkmb-testimonial-track">
+        {% for t in testimonials %}
+          <div class="nkmb-testimonial-slide">
+            <div class="nkmb-testimonial">
+              <span class="nkmb-testi-mark" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M9.2 5C6.3 6.3 4 9.2 4 13v6h6.5v-6.5H7.4c.1-2 1.3-3.6 3-4.4L9.2 5zm9 0C15.3 6.3 13 9.2 13 13v6h6.5v-6.5h-3.1c.1-2 1.3-3.6 3-4.4L18.2 5z"/></svg>
+              </span>
+              <blockquote>{{ t.quote }}</blockquote>
+              <div class="nkmb-testi-author">
+                <span class="nkmb-testi-avatar" aria-hidden="true">{{ t.initials }}</span>
+                <span class="nkmb-testi-who">
+                  <b>{{ t.name }}</b>
+                  <span>{{ t.role }}{% if t.role and t.organisation %} · {% endif %}{{ t.organisation }}</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="nkmb-slide-controls">
+        <button class="nkmb-slide-arrow" data-dir="-1" aria-label="Previous testimonial">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3 L5 8 L10 13" stroke="#2B2320" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nkmb-slide-dots" id="testimonial-dots"></div>
+        <button class="nkmb-slide-arrow" data-dir="1" aria-label="Next testimonial">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3 L11 8 L6 13" stroke="#2B2320" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+{% endif %}
 
   <section class="nkmb-section tint" id="partners">
     <div class="nkmb-section-head">
@@ -69,6 +109,7 @@
     <div style="display:flex; flex-direction:column; gap:12px; align-items:flex-start;">
       <a class="btn-primary" href="{% url 'contact' %}">Get in touch →</a>
       <a href="{% url 'services' %}" style="color:#fff; opacity:0.8; font-family:'Inter',sans-serif; font-size:13.5px;">See our services →</a>
+      <a href="{{ linkedin_url }}" target="_blank" rel="noopener" style="color:#fff; opacity:0.8; font-family:'Inter',sans-serif; font-size:13.5px;">Connect with us on LinkedIn →</a>
     </div>
   </section>
 

@@ -97,9 +97,17 @@
         {% for t in testimonials %}
           <div class="nkmb-testimonial-slide">
             <div class="nkmb-testimonial">
-              <div class="mark">"</div>
+              <span class="nkmb-testi-mark" aria-hidden="true">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M9.2 5C6.3 6.3 4 9.2 4 13v6h6.5v-6.5H7.4c.1-2 1.3-3.6 3-4.4L9.2 5zm9 0C15.3 6.3 13 9.2 13 13v6h6.5v-6.5h-3.1c.1-2 1.3-3.6 3-4.4L18.2 5z"/></svg>
+              </span>
               <blockquote>{{ t.quote }}</blockquote>
-              <cite>— {{ t.name }}, {{ t.role }}{% if t.organisation %}, {{ t.organisation }}{% endif %}</cite>
+              <div class="nkmb-testi-author">
+                <span class="nkmb-testi-avatar" aria-hidden="true">{{ t.initials }}</span>
+                <span class="nkmb-testi-who">
+                  <b>{{ t.name }}</b>
+                  <span>{{ t.role }}{% if t.role and t.organisation %} · {% endif %}{{ t.organisation }}</span>
+                </span>
+              </div>
             </div>
           </div>
         {% endfor %}

@@ -72,3 +72,38 @@ class Vacancy(models.Model):
 
     def requirements_list(self):
         return self._lines(self.requirements)
+
+
+class Testimonial(models.Model):
+    """A client testimonial shown on the Clients & Partners page and the Home page.
+
+    Only tick "Approved" once the client has given you permission (ideally in
+    writing) to publish their words and name. Unapproved ones stay hidden.
+    """
+
+    quote = models.TextField(help_text="The exact words the client approved.")
+    name = models.CharField(max_length=100, help_text="The person who said it.")
+    role = models.CharField(max_length=100, blank=True, help_text="For example: Finance Manager")
+    organisation = models.CharField(
+        max_length=150, blank=True,
+        help_text="For example: ABC College. Leave empty if they prefer not to be named.",
+    )
+    is_approved = models.BooleanField(
+        "Approved to publish", default=False,
+        help_text="Tick only when the client has agreed to have this shown on the website.",
+    )
+    display_order = models.PositiveIntegerField(
+        default=0, help_text="Lower numbers show first.",
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["display_order", "-created_at"]
+
+    def __str__(self):
+        return f"{self.name}" + (f" ({self.organisation})" if self.organisation else "")
+
+    @property
+    def initials(self):
+        words = [w for w in self.name.replace("[SAMPLE]", "").split() if w]
+        return "".join(w[0] for w in words[:2]).upper() or "?"

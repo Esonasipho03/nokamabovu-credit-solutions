@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Vacancy
+from .models import Testimonial, Vacancy
 
 
 @admin.register(Vacancy)
@@ -23,3 +23,11 @@ class VacancyAdmin(admin.ModelAdmin):
     @admin.action(description="Hide selected vacancies")
     def unpublish(self, request, queryset):
         queryset.update(is_published=False)
+
+
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    list_display = ("name", "organisation", "role", "is_approved", "display_order")
+    list_editable = ("is_approved", "display_order")
+    list_filter = ("is_approved",)
+    search_fields = ("name", "organisation", "quote")

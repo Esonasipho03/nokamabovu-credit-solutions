@@ -71,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'website.context_processors.site_links',
             ],
         },
     },
@@ -187,4 +188,11 @@ DEFAULT_FROM_EMAIL = os.environ.get(
 )
 CONTACT_RECIPIENT_EMAIL = os.environ.get(
     "DJANGO_CONTACT_RECIPIENT_EMAIL", "info@nokamabovu.co.za"
+)
+
+# LinkedIn "Connect with us" link. Set DJANGO_LINKEDIN_URL in Render to the exact
+# company page, e.g. https://www.linkedin.com/company/your-page-name/
+LINKEDIN_URL = os.environ.get(
+    "DJANGO_LINKEDIN_URL",
+    "https://www.linkedin.com/search/results/companies/?keywords=Nokamabovu%20Credit%20Solutions",
 )

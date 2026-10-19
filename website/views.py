@@ -2,12 +2,7 @@ from django.conf import settings
 from django.core.mail import EmailMessage
 from django.shortcuts import render
 
-from .models import Vacancy
-
-
-TESTIMONIALS = [
-    # Add approved client testimonials here (see the note in home() below).
-]
+from .models import Testimonial, Vacancy
 
 
 def home(request):
@@ -26,21 +21,8 @@ def home(request):
             {"idx": "02", "title": "Sales Solutions",
              "body": "Vehicle tracking and car insurance solutions, helping you protect what you have."},
         ],
-        # Only REAL client testimonials go here, and only once the client has
-        # given written permission to publish their words and name.
-        # Set "approved": True once that permission is on file.
-        # While this list has no approved entries, the whole testimonials
-        # section (and its link in the jump menu) is hidden automatically.
-        #
-        # Example of one entry:
-        # {
-        #     "quote": "Exact words the client approved.",
-        #     "name": "Thandi Mokoena",          # real person who said it
-        #     "role": "Finance Manager",
-        #     "organisation": "ABC College",     # or "" if they prefer not to be named
-        #     "approved": True,
-        # },
-        "testimonials": [t for t in TESTIMONIALS if t.get("approved")],
+        # Testimonials are managed in the Django admin (Website > Testimonials).
+        "testimonials": list(Testimonial.objects.filter(is_approved=True)),
     }
     return render(request, "home.html", context)
 
@@ -212,6 +194,7 @@ def partners(request):
     # its line; to add one, put the logo in static/img/logos/ and add a line.
     context = {
         "active": "partners",
+        "testimonials": list(Testimonial.objects.filter(is_approved=True)),
         "clients": [
             {"name": "Dalpark Learning Academy", "logo": "dalpark-learning-academy.png",
              "sector": "Education · The King's Academies"},
