@@ -135,13 +135,20 @@
         <a href="{% url 'about' %}" style="font-size:15.5px; font-weight:600; color:var(--orange-dark);">Read our story →</a>
       </div>
       <div>
-        <div class="car-stack" aria-label="Photos of life at Nokamabovu">
-          <figure class="car-card c1" tabindex="0"><img src="{% static 'img/life-jackets.jpg' %}" alt="The Nokamabovu team together in company jackets" loading="lazy" style="object-position:center 60%;"></figure>
-          <figure class="car-card c2" tabindex="0"><img src="{% static 'img/life-rooftop.jpg' %}" alt="Nokamabovu team members on a city rooftop" loading="lazy"></figure>
-          <figure class="car-card c3" tabindex="0"><img src="{% static 'img/life-soccer.jpg' %}" alt="Nokamabovu team after a soccer match" loading="lazy"></figure>
-          <figure class="car-card c4" tabindex="0"><img src="{% static 'img/life-heritage.jpg' %}" alt="Nokamabovu colleagues in traditional attire on Heritage Day" loading="lazy"></figure>
+        <div class="car-deck" id="life-deck" aria-roledescription="carousel" aria-label="Photos of life at Nokamabovu">
+          <div class="car-deck-stage">
+            <figure class="car-slide" data-cap="Together in our company jackets"><img src="{% static 'img/life-jackets.jpg' %}" alt="The Nokamabovu team together in company jackets" style="object-position:center 60%;"></figure>
+            <figure class="car-slide" data-cap="Rooftop views, team spirit"><img src="{% static 'img/life-rooftop.jpg' %}" alt="Nokamabovu team members on a city rooftop"></figure>
+            <figure class="car-slide" data-cap="Game day with the team"><img src="{% static 'img/life-soccer.jpg' %}" alt="Nokamabovu team after a soccer match"></figure>
+            <figure class="car-slide" data-cap="Celebrating Heritage Day"><img src="{% static 'img/life-heritage.jpg' %}" alt="Nokamabovu colleagues in traditional attire on Heritage Day"></figure>
+          </div>
+          <div class="car-deck-controls">
+            <button type="button" class="car-deck-btn" data-dir="-1" aria-label="Previous photo">&#8592;</button>
+            <div class="car-deck-dots" role="tablist"></div>
+            <button type="button" class="car-deck-btn" data-dir="1" aria-label="Next photo">&#8594;</button>
+          </div>
         </div>
-        <p class="nkmb-photo-caption" style="text-align:center;">Team days, good company and plenty of energy</p>
+        <p class="nkmb-photo-caption" id="life-caption" style="text-align:center;">Together in our company jackets</p>
       </div>
     </div>
   </section>
@@ -176,4 +183,30 @@
   </section>
 
   <script src="{% static 'js/careers.js' %}" defer></script>
+  <script>
+  (function(){
+    var deck=document.getElementById('life-deck'); if(!deck) return;
+    var slides=[].slice.call(deck.querySelectorAll('.car-slide')), n=slides.length, cur=0, timer;
+    var dots=deck.querySelector('.car-deck-dots'), cap=document.getElementById('life-caption');
+    slides.forEach(function(_,i){var d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Photo '+(i+1));d.onclick=function(){go(i,true)};dots.appendChild(d);});
+    function render(){
+      slides.forEach(function(el,i){
+        var d=(i-cur+n)%n;
+        el.className='car-slide'+(d===0?' is-active':d===1?' is-next':d===2?' is-next2':d===n-1?' is-prev':' is-hidden');
+        el.setAttribute('aria-hidden',d===0?'false':'true');
+      });
+      [].forEach.call(dots.children,function(b,i){b.className=i===cur?'on':'';});
+      if(cap) cap.textContent=slides[cur].getAttribute('data-cap')||'';
+    }
+    function go(i,user){cur=(i+n)%n;render();if(user)restart();}
+    function restart(){clearInterval(timer);if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches)timer=setInterval(function(){go(cur+1)},4500);}
+    deck.querySelectorAll('.car-deck-btn').forEach(function(b){b.onclick=function(){go(cur+parseInt(b.dataset.dir,10),true)}});
+    slides.forEach(function(el){el.onclick=function(){if(el.classList.contains('is-active'))go(cur+1,true)}});
+    deck.addEventListener('mouseenter',function(){clearInterval(timer)});deck.addEventListener('mouseleave',restart);
+    var x0=null;deck.addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+    deck.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>40)go(cur+(dx<0?1:-1),true);x0=null});
+    render();restart();
+  })();
+  </script>
+
 {% endblock %}

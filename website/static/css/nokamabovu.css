@@ -728,3 +728,23 @@ img{ max-width:100%; display:block; }
 .nkmb-testi-who b{ font-size:15px; color:var(--ink); }
 .nkmb-testi-who span{ font-size:13px; color:var(--muted); }
 @media (max-width:720px){ .nkmb-testimonial{ padding:36px 24px 30px; } .nkmb-testimonial blockquote{ font-size:17px; } }
+
+.logo-wordmark{ font-family:'Sora','Inter',sans-serif; font-weight:800; font-size:38px; letter-spacing:2px; color:var(--orange); }
+
+/* Life at Nokamabovu: card slideshow */
+.car-deck{ width:100%; max-width:520px; margin:0 auto; }
+.car-deck-stage{ position:relative; aspect-ratio:4/3.4; margin:0 0 6px; }
+.car-slide{ position:absolute; inset:0 6% 0 0; margin:0; padding:10px; background:#fff; border:1px solid var(--line); border-radius:16px; box-shadow:0 14px 30px rgba(40,25,15,.18); transition:transform .6s cubic-bezier(.2,.7,.2,1), opacity .5s ease; cursor:pointer; opacity:0; transform:scale(.9); }
+.car-slide img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:9px; }
+.car-slide.is-active{ opacity:1; transform:none; z-index:5; }
+.car-slide.is-next{ opacity:1; transform:translate(7%,4%) rotate(4deg) scale(.96); z-index:4; }
+.car-slide.is-next2{ opacity:1; transform:translate(12%,8%) rotate(8deg) scale(.92); z-index:3; }
+.car-slide.is-prev{ opacity:0; transform:translateX(-90%) rotate(-14deg); z-index:6; pointer-events:none; }
+.car-slide.is-hidden{ opacity:0; z-index:1; pointer-events:none; }
+.car-deck-controls{ display:flex; align-items:center; justify-content:center; gap:14px; margin-top:14px; }
+.car-deck-btn{ width:38px; height:38px; border-radius:50%; border:1px solid var(--line); background:#fff; color:var(--ink); font-size:16px; cursor:pointer; }
+.car-deck-btn:hover{ border-color:var(--orange); color:var(--orange); }
+.car-deck-dots{ display:flex; gap:8px; }
+.car-deck-dots button{ width:9px; height:9px; padding:0; border-radius:50%; border:0; background:#D9CFC8; cursor:pointer; }
+.car-deck-dots button.on{ background:var(--orange); width:22px; border-radius:6px; }
+@media (prefers-reduced-motion:reduce){ .car-slide{ transition:none; } }

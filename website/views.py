@@ -194,7 +194,6 @@ def partners(request):
     # its line; to add one, put the logo in static/img/logos/ and add a line.
     context = {
         "active": "partners",
-        "testimonials": list(Testimonial.objects.filter(is_approved=True)),
         "clients": [
             {"name": "Dalpark Learning Academy", "logo": "dalpark-learning-academy.png",
              "sector": "Education · The King's Academies"},
@@ -208,18 +207,30 @@ def partners(request):
              "sector": "Education · Independent college"},
             {"name": "SA Academy of Applied Competence", "logo": "saaac.png",
              "sector": "Education · Skills training"},
+            {"name": "Motjholoko Early Childhood Development Centre", "logo": "motjholoko-ecd.png",
+             "sector": "Education · Early childhood development"},
+            {"name": "Totus Tuus Skool School", "logo": "totus-tuus-school.png",
+             "sector": "Education · School"},
+            {"name": "Vilakazi Healthcare", "logo": "vilakazi-healthcare.png",
+             "sector": "Healthcare"},
+            {"name": "Athalia Medical Center", "logo": "athalia-medical-center.png",
+             "sector": "Healthcare · Surgery"},
+        ],
+        # Sponsors of the YES (Youth Employment Service) programme. Text-only until
+        # logos are supplied: add "logo": "file.png" to a line to show one.
+        "sponsors": [
+            {"name": "AVA", "logo": "ava.png", "sector": "YES Programme sponsor"},
+            {"name": "KVR Training", "logo": "kvr-training.png", "sector": "YES Programme sponsor"},
         ],
         "partners": [
             {"name": "King Price Insurance", "logo": "king-price-insurance.png",
              "sector": "Car insurance"},
             {"name": "Pineapple", "logo": "pineapple.png",
              "sector": "Car insurance"},
-            {"name": "Hippo", "logo": "hippo.png",
-             "sector": "Insurance comparison"},
             {"name": "Tracker", "logo": "tracker.png",
              "sector": "Vehicle tracking"},
-            {"name": "Cartrack", "logo": "cartrack.png",
-             "sector": "Vehicle tracking"},
+            {"name": "Telesure Investment Holdings (TIH)", "logo": "tih.png",
+             "sector": "Insurance group"},
         ],
     }
     return render(request, "partners.html", context)
