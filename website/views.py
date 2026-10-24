@@ -215,6 +215,10 @@ def partners(request):
              "sector": "Healthcare"},
             {"name": "Athalia Medical Center", "logo": "athalia-medical-center.png",
              "sector": "Healthcare · Surgery"},
+            {"name": "Swiss Property Group", "logo": "swiss-property-group.png",
+             "sector": "Property"},
+            {"name": "WHA Holdings", "logo": "wha-holdings.png",
+             "sector": "Property"},
         ],
         # Sponsors of the YES (Youth Employment Service) programme. Text-only until
         # logos are supplied: add "logo": "file.png" to a line to show one.
