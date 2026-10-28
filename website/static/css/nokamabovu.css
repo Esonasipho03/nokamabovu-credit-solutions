@@ -748,3 +748,47 @@ img{ max-width:100%; display:block; }
 .car-deck-dots button{ width:9px; height:9px; padding:0; border-radius:50%; border:0; background:#D9CFC8; cursor:pointer; }
 .car-deck-dots button.on{ background:var(--orange); width:22px; border-radius:6px; }
 @media (prefers-reduced-motion:reduce){ .car-slide{ transition:none; } }
+
+
+/* ---------- Hero with a portrait photo (Services page) ---------- */
+/* Desktop: the photo sits on the right and blends softly into the white
+   behind the heading, the same way the About and Careers heroes do. */
+@media (min-width: 881px){
+  .hero-portrait{ min-height:72vh; }
+  .hero-portrait .nkmb-hero-photo{
+    left:auto; right:0; width:58%;
+    object-position:center 24%;
+  }
+  .hero-portrait .nkmb-hero-scrim{
+    background:linear-gradient(90deg,
+      var(--paper) 0%, var(--paper) 42%,
+      rgba(255,255,255,0.85) 47%, rgba(255,255,255,0.45) 54%,
+      rgba(255,255,255,0.12) 62%, rgba(255,255,255,0) 70%);
+  }
+}
+/* Phone: banner strip above the heading, fading into the page below */
+@media (max-width: 880px){
+  .hero-portrait .nkmb-hero-bg{ height:300px; }
+  .hero-portrait .nkmb-hero-photo{ object-position:center 22%; }
+}
+
+/* ---------- Careers hero: full team photo ---------- */
+/* Desktop: the team sits on the right and blends softly into the white
+   behind the heading, matching the Services and About heroes. */
+@media (min-width: 881px){
+  .careers-hero .nkmb-hero-photo{
+    left:auto; right:0; width:66%;
+    object-position:20% 60%;
+  }
+  .careers-hero .car-hero-scrim{
+    background:linear-gradient(90deg,
+      var(--paper) 0%, var(--paper) 34%,
+      rgba(255,255,255,0.85) 40%, rgba(255,255,255,0.45) 47%,
+      rgba(255,255,255,0.12) 55%, rgba(255,255,255,0) 62%);
+  }
+}
+/* Phone: team strip above the heading */
+@media (max-width: 880px){
+  .careers-hero .nkmb-hero-bg{ height:260px; }
+  .careers-hero .nkmb-hero-photo{ object-position:45% 65%; }
+}
